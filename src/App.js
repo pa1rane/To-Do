@@ -13,14 +13,57 @@ const App = () => {
 
  const handleSubmit = (e) => {
     e.preventDefault();
+    if(input !== ""){
    setToDoList((prev) => [...prev, input])
+    }
    setInput('')
+ }
+
+ const handleMoveUp = (index) => {
+  if(index > 0) {
+   setToDoList((prevList) => {
+    const updatedList = [...prevList];
+    [updatedList[index], updatedList[index - 1]] = [updatedList[index -1], updatedList[index]]
+    return updatedList;
+   })
+  }
+ }
+
+ const handleMoveDown = (index) => {
+  if(index < toDoList.length - 1) {
+  setToDoList((prevList) => {
+    const updatedListDown = [...prevList];
+    [updatedListDown[index], updatedListDown[index + 1]] = [updatedListDown[index + 1], updatedListDown[index]]
+    return updatedListDown
+  })
+ }
+ } 
+
+ const handleDelete = (index) => {
+    setToDoList((prevList) => {
+      const deleteItem = [...prevList]
+      const updatedList = deleteItem.filter((item,i) => i !== index)
+      return updatedList
+    })
+ }
+
+ const handleMarkDone = (index) => {
+    setToDoList((prevList) => {
+      const markList = [...prevList]
+      markList[index] = {
+        ...markList[index],
+        style : {
+          textDecoration:'line-through'
+        }
+      }
+       return markList
+    })
  }
 
   return (
     <>
     <AddToDo input={input} handleChange={handlInputChange} handleSubmit={handleSubmit}/> 
-    <List toDoList={toDoList}/>     
+    <List toDoList={toDoList} handleMoveUp={handleMoveUp} handleMoveDown={handleMoveDown} handleDelete={handleDelete} mark={handleMarkDone}/>     
     </>
   )
 }
