@@ -14,7 +14,7 @@ const App = () => {
  const handleSubmit = (e) => {
     e.preventDefault();
     if(input !== ""){
-   setToDoList((prev) => [...prev, input])
+   setToDoList((prev) => [...prev, {text: input , isCompletes: false}])
     }
    setInput('')
  }
@@ -52,9 +52,7 @@ const App = () => {
       const markList = [...prevList]
       markList[index] = {
         ...markList[index],
-        style : {
-          textDecoration:'line-through'
-        }
+       isCompletes : !markList[index].isCompletes
       }
        return markList
     })
