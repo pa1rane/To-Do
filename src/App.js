@@ -47,21 +47,21 @@ const App = () => {
     })
  }
 
- const handleMarkDone = (index) => {
+ const handleSelected = (index) => {
     setToDoList((prevList) => {
-      const markList = [...prevList]
-      markList[index] = {
-        ...markList[index],
-       isCompletes : !markList[index].isCompletes
+      const selectList = [...prevList]
+      selectList[index] = {
+        ...selectList[index],
+       isCompletes : !selectList[index].isCompletes
       }
-       return markList
+       return selectList
     })
  }
 
   return (
     <>
     <AddToDo input={input} handleChange={handlInputChange} handleSubmit={handleSubmit}/> 
-    <List toDoList={toDoList} handleMoveUp={handleMoveUp} handleMoveDown={handleMoveDown} handleDelete={handleDelete} mark={handleMarkDone}/>     
+    <List toDoList={toDoList} handleMoveUp={handleMoveUp} handleMoveDown={handleMoveDown} handleDelete={handleDelete} select={handleSelected}/>     
     </>
   )
 }
